@@ -12,7 +12,7 @@ import java.util.Arrays;
  */
 public class Proyecto {
     public static void main(String[] args) {
-        Bank bank = Bank.load("prod.txt");
+        Bank bank = Bank.load(Constants.BANK_FILENAME);
         if (bank == null) {
             bank = new Bank("Banco nacional")
                 .setPreferentialBox(new Box("discapacitados", false))
@@ -25,7 +25,6 @@ public class Proyecto {
                     )
                 ).save("prod.txt");
         }
-
-        System.out.println(bank);
+        System.out.println(Constants.BANK_FILENAME);
     }
 }

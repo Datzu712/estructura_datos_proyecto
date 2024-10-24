@@ -4,12 +4,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Box implements Serializable {
+    private static int nextId = 0;
+
+    public final int id;
     public String type;
     public boolean preferential;
 
     private ArrayList<Client> queue = new ArrayList<Client>();
 
     public Box(String type, boolean preferential) {
+        this.id = nextId++;
         this.type = type;
         this.preferential = preferential;
     }

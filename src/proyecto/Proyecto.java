@@ -14,7 +14,7 @@ public class Proyecto {
     public static void main(String[] args) {
         Bank bank = Bank.load(Constants.BANK_FILENAME);
         if (bank == null) {
-            bank = new Bank("Banco nacional");
+            bank = Bank.build("Banco nacional");
             
             bank.boxes
                 .setPreferentialBox(new Box("discapacitados", false))

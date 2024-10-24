@@ -1,16 +1,22 @@
 package proyecto;
 
-import java.util.List;
 import java.io.*;
 
 public class Bank implements Serializable {
-    public String name;
+    private static Bank globalInstance = null;
 
+    public String name;
     public final BoxManager boxes = BoxManager.build();
 
-    // me da cringe ver tantos parámetros
-    public Bank(String name) {
+    private Bank(String name) {
         this.name = name;
+    }
+
+    static Bank build(String name) {
+        if (globalInstance == null) {
+            globalInstance = new Bank(name);
+        }
+        return globalInstance;
     }
 
     public Bank save(String filename) {

@@ -3,8 +3,8 @@ package proyecto;
 import java.util.List;
 import java.io.Serializable;
 
+// singleton pattern / We only need 1 instance of this class
 public class BoxManager implements Serializable {
-    // singleton pattern / We only need 1 instance of this class
     private static BoxManager globalInstance = null;
 
     public Box preferentialBox = null;

@@ -11,7 +11,7 @@ public enum TicketType {
         this.value = value;
     }
 
-    public String getValue() {
+    public String getType() {
         return value;
     }
 }

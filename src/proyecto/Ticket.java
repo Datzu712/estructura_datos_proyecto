@@ -5,6 +5,9 @@ import java.io.Serializable;
 
 // Nodo
 public class Ticket implements Serializable {
+    private static int nextId = 1;
+
+    public final int id = nextId++;
     private Client currentClient = null;
     private Ticket nextTicket = null;
 
@@ -13,6 +16,7 @@ public class Ticket implements Serializable {
     public String transaction;
     public String type; // preferencial, solo tramite, dos o mas tramites
 
+    public Box assignedBox = null;
 
     // todo: change for a builder pattern like Bank to avoid so many parameters D:
     public Ticket(String transaction, String type) {

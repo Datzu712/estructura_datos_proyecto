@@ -3,6 +3,7 @@ package proyecto;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+// clase cola
 public class Box implements Serializable {
     private static int nextId = 0;
 

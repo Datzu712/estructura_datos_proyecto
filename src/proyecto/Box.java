@@ -1,0 +1,42 @@
+package proyecto;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class Box implements Serializable {
+    public String type;
+    public boolean preferential;
+
+    private ArrayList<Client> queue = new ArrayList<Client>();
+
+    public Box(String type, boolean preferential) {
+        this.type = type;
+        this.preferential = preferential;
+    }
+
+    public void enqueue(Client client) {
+        queue.add(client);
+    }
+
+    public Client dequeue() {
+        if (queue.isEmpty()) {
+            return null;
+        }
+        return queue.remove(0);
+    }
+
+    public Client peek() {
+        if (queue.isEmpty()) {
+            return null;
+        }
+        return queue.get(0);
+    }
+
+    public boolean isEmpty() {
+        return queue.isEmpty();
+    }
+
+    public int size() {
+        return queue.size();
+    }
+}

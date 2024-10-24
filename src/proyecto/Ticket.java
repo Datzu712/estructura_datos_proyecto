@@ -39,6 +39,11 @@ public class Ticket implements Serializable {
     }
 
     public String toString() {
-        return String.format("Ticket %d: %s", this.createdAt, this.transaction);
+        return "Ticket{" +
+            "createdAt=" + this.createdAt +
+            ", attendedAt=" + this.attendedAt +
+            ", transaction='" + this.transaction + '\'' +
+            ", type='" + this.type + '\'' +
+            '}';
     }
 }

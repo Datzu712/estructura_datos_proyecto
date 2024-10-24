@@ -28,6 +28,6 @@ public class Proyecto {
                 );
             bank.save("prod.txt");
         }
-        System.out.println(Constants.BANK_FILENAME);
+        System.out.println(bank);
     }
 }

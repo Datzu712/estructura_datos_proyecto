@@ -2,6 +2,7 @@ package proyecto;
 
 import java.io.*;
 
+// Singleton
 public class Bank implements Serializable {
     private static Bank globalInstance = null;
 

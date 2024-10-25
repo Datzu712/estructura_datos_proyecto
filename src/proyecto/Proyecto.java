@@ -43,6 +43,6 @@ public class Proyecto {
         Ticket ticketAttended = bank.boxes.preferentialBox.attend();
         JOptionPane.showMessageDialog(null, "Ticket atendido: " + ticketAttended, "Ticket atendido", JOptionPane.INFORMATION_MESSAGE);
 
-        
+        bank.save(Constants.BANK_FILENAME);
     }
 }

@@ -32,10 +32,16 @@ public class Proyecto {
         }
         Client client = new Client("Sr. Alfredo");
         Ticket ticket = new Ticket("retiro", TicketType.SINGLE_TRANSACTION);
-        JOptionPane.showMessageDialog(null, "Hora de creacion del ticket:" + ticket.createdAt);
+
+        Client client2 = new Client("Client stacks..."); // the idea of this client is to test the saved data is loaded correctly
+        Ticket ticket2 = new Ticket("retiro", TicketType.SINGLE_TRANSACTION);
+        ticket2.setCurrentClient(client2);
+
+        JOptionPane.showMessageDialog(null, "Hora de creación del ticket de Sr. Alfredo:" + ticket.createdAt);
         ticket.setCurrentClient(client);
 
         bank.boxes.preferentialBox.enqueue(ticket);
+        bank.boxes.preferentialBox.enqueue(ticket2);
         bank.save(Constants.BANK_FILENAME);
 
         JOptionPane.showMessageDialog(null, "Ticket en cola: " + bank.boxes.preferentialBox, "Ticket en cola preferencial", JOptionPane.INFORMATION_MESSAGE);

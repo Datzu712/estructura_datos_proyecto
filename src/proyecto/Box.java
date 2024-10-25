@@ -45,6 +45,7 @@ public class Box implements Serializable {
             return null;
         }
 
+        // todo: Only change attendedAt if the ticket is not already attended and don't remove it from the queue
         Ticket ticket = currentTicket;
         currentTicket = currentTicket.getNextTicket();
 

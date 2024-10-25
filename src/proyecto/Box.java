@@ -65,6 +65,7 @@ public class Box implements Serializable {
             }
             lastTicket.setNextTicket(ticket);
         }
+        ticket.assignedBox = this;
         size++;
     }
 

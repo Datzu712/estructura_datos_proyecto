@@ -35,10 +35,11 @@ public class Proyecto {
 
         Client client2 = new Client("Client stacks..."); // the idea of this client is to test the saved data is loaded correctly
         Ticket ticket2 = new Ticket("retiro", TicketType.SINGLE_TRANSACTION);
-        ticket2.setCurrentClient(client2);
 
         JOptionPane.showMessageDialog(null, "Hora de creación del ticket de Sr. Alfredo:" + ticket.createdAt);
+
         ticket.setCurrentClient(client);
+        ticket2.setCurrentClient(client2);
 
         bank.boxes.preferentialBox.enqueue(ticket);
         bank.boxes.preferentialBox.enqueue(ticket2);

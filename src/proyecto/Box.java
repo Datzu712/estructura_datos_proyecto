@@ -1,6 +1,7 @@
 package proyecto;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 public class Box implements Serializable {
     private static int nextId = 0;
@@ -46,6 +47,8 @@ public class Box implements Serializable {
 
         Ticket ticket = currentTicket;
         currentTicket = currentTicket.getNextTicket();
+
+        ticket.attendedAt = LocalDateTime.now();
 
         size--;
         return ticket;

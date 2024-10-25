@@ -14,12 +14,12 @@ public class Ticket implements Serializable {
     public final LocalDateTime createdAt;
     public LocalDateTime attendedAt;
     public String transaction;
-    public String type; // preferencial, solo tramite, dos o mas tramites
+    public TicketType type; // preferencial, solo tramite, dos o mas tramites
 
     public Box assignedBox = null;
 
     // todo: change for a builder pattern like Bank to avoid so many parameters D:
-    public Ticket(String transaction, String type) {
+    public Ticket(String transaction, TicketType type) {
         this.createdAt = LocalDateTime.now();
         this.attendedAt = null;
         this.transaction = transaction;
@@ -41,13 +41,13 @@ public class Ticket implements Serializable {
     public Client getCurrentClient() {
         return this.currentClient;
     }
-
     public String toString() {
         return "Ticket{" +
             "createdAt=" + this.createdAt +
             ", attendedAt=" + this.attendedAt +
             ", transaction='" + this.transaction + '\'' +
             ", type='" + this.type + '\'' +
+            ", client=" + this.currentClient +
             '}';
     }
 }

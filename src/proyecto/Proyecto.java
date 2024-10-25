@@ -6,6 +6,8 @@ package proyecto;
 
 import java.util.Arrays;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author juan
@@ -28,6 +30,19 @@ public class Proyecto {
                 );
             bank.save("prod.txt");
         }
-        System.out.println(bank);
+        Client client = new Client("Sr. Alfredo");
+        Ticket ticket = new Ticket("retiro", TicketType.SINGLE_TRANSACTION);
+        JOptionPane.showMessageDialog(null, "Hora de creacion del ticket:" + ticket.createdAt);
+        ticket.setCurrentClient(client);
+
+        bank.boxes.preferentialBox.enqueue(ticket);
+        bank.save(Constants.BANK_FILENAME);
+
+        JOptionPane.showMessageDialog(null, "Ticket en cola: " + bank.boxes.preferentialBox, "Ticket en cola preferencial", JOptionPane.INFORMATION_MESSAGE);
+
+        Ticket ticketAttended = bank.boxes.preferentialBox.attend();
+        JOptionPane.showMessageDialog(null, "Ticket atendido: " + ticketAttended, "Ticket atendido", JOptionPane.INFORMATION_MESSAGE);
+
+        
     }
 }

@@ -2,17 +2,17 @@ package proyecto;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Iterator;
 
-public class Box implements Serializable {
+public class Box implements Serializable, Iterable<Ticket> { 
     private static int nextId = 0;
 
-    private Ticket currentTicket, nexTicket = null;
+    private Nodo<Ticket> currentNodo, lastNodo = null;
     private int size = 0;
 
     public final int id;
-    public String type;
-    public boolean preferential;
-
+    public final String type;
+    public final boolean preferential;
 
     public Box(String type, boolean preferential) {
         this.id = nextId++;
@@ -24,30 +24,38 @@ public class Box implements Serializable {
         return size;
     }
     public void setCurrentTicket(Ticket ticket) {
-        this.currentTicket = ticket;
+        this.currentNodo = new Nodo<Ticket>(ticket);
     }
 
     public Ticket getCurrentTicket() {
-        return this.currentTicket;
+        return this.currentNodo.getCurrentValue();
     }
 
     public void setNextTicket(Ticket ticket) {
-        this.nexTicket = ticket;
+        this.currentNodo.setNextValue(ticket);
     }
 
     public Ticket getNextTicket() {
-        return this.nexTicket;
+        return this.currentNodo.getCurrentValue();
     }
 
-    public Ticket attend() {
-        if (currentTicket == null) {
-            System.out.println("No hay tickets en la cola");
+    public Ticket getLastTicket() {
+        if (lastNodo == null) {
             return null;
         }
 
-        // todo: Only change attendedAt if the ticket is not already attended and don't remove it from the queue
-        Ticket ticket = currentTicket;
-        currentTicket = currentTicket.getNextTicket();
+        return this.lastNodo.getCurrentValue();
+    }
+
+    public Ticket attend() {
+        if (currentNodo == null) {
+            Logger.log("No hay tickets en la cola");
+            return null;
+        }
+        Nodo<Ticket> attendedTicket = currentNodo;
+        currentNodo = currentNodo.getNextValue();
+
+        Ticket ticket = attendedTicket.getCurrentValue();
 
         ticket.attendedAt = LocalDateTime.now();
 
@@ -56,14 +64,13 @@ public class Box implements Serializable {
     }
 
     public void enqueue(Ticket ticket) {
-        if (currentTicket == null) {
-            currentTicket = ticket;
+        Nodo<Ticket> newLastNodo = new Nodo<Ticket>(ticket);
+        if (currentNodo == null) {
+            currentNodo = newLastNodo;
+            lastNodo = newLastNodo;
         } else {
-            Ticket lastTicket = currentTicket;
-            while (lastTicket.getNextTicket() != null) {
-                lastTicket = lastTicket.getNextTicket();
-            }
-            lastTicket.setNextTicket(ticket);
+            lastNodo.setNextValue(newLastNodo);
+            lastNodo = newLastNodo;
         }
         ticket.assignedBox = this;
         size++;
@@ -76,12 +83,36 @@ public class Box implements Serializable {
     @Override
     public String toString() {
         String output = "";
-        Ticket ticket = currentTicket;
-        while (ticket != null) {
-            output += ticket.toString() + "\n";
-            ticket = ticket.getNextTicket();
-        }
 
+        for (Ticket ticket : this) {
+            output += ticket + "\n";
+        }
         return output;
+    }
+
+    @Override
+    public Iterator<Ticket> iterator() {
+        return new Box.BoxIterator(currentNodo);
+    }
+
+    private static class BoxIterator implements Serializable, Iterator<Ticket> {
+        private Nodo<Ticket> currentIteratorNode;
+    
+        public BoxIterator(Nodo<Ticket> currentTicket) {
+            this.currentIteratorNode = currentTicket;
+        }
+    
+        @Override
+        public boolean hasNext() {
+            return currentIteratorNode != null;
+        }
+    
+        @Override
+        public Ticket next() {
+            Nodo<Ticket> currentTicket = currentIteratorNode;
+            currentIteratorNode = currentIteratorNode.getNextValue();
+    
+            return currentTicket.getCurrentValue();
+        }
     }
 }

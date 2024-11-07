@@ -6,7 +6,7 @@ import java.io.*;
 public class Bank implements Serializable {
     private static Bank globalInstance = null;
 
-    public String name;
+    public final String name;
     public final BoxManager boxes = BoxManager.build();
 
     private Bank(String name) {
@@ -46,18 +46,15 @@ public class Bank implements Serializable {
             file.close();
         } catch (FileNotFoundException e) {
             return null;
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-
         return bank;
     }
     
     @Override
     public String toString() {
-        return "Bank{" +
+        return "Bank {" +
                 "name='" + name + '\'' +
                 ", preferentialBox=" + this.boxes.preferentialBox +
                 ", quickTransactionsBox=" + this.boxes.quickTransactionsBox +

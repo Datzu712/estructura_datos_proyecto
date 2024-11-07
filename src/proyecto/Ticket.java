@@ -9,12 +9,11 @@ public class Ticket implements Serializable {
 
     public final int id = nextId++;
     private Client currentClient = null;
-    private Ticket nextTicket = null;
 
     public final LocalDateTime createdAt;
     public LocalDateTime attendedAt;
-    public String transaction;
-    public TicketType type; // preferencial, solo tramite, dos o mas tramites
+    public final String transaction;
+    public final TicketType type; // preferencial, solo tramite, dos o mas tramites
 
     public Box assignedBox = null;
 
@@ -26,14 +25,6 @@ public class Ticket implements Serializable {
         this.type = type;
     }
 
-    public void setNextTicket(Ticket nextTicket) {
-        this.nextTicket = nextTicket;
-    }
-
-    public Ticket getNextTicket() {
-        return this.nextTicket;
-    }
-
     public void setCurrentClient(Client client) {
         this.currentClient = client;
     }
@@ -42,12 +33,13 @@ public class Ticket implements Serializable {
         return this.currentClient;
     }
     public String toString() {
-        return "Ticket{" +
-            "createdAt=" + this.createdAt +
-            ", attendedAt=" + this.attendedAt +
-            ", transaction='" + this.transaction + '\'' +
-            ", type='" + this.type + '\'' +
-            ", client=" + this.currentClient +
-            '}';
+        return "Ticket {" +
+            "createdAt=" + this.createdAt + ", " +
+            "attendedAt=" + this.attendedAt + ", " +
+            "transaction='" + this.transaction + ", " +
+            "type='" + this.type  + ", " +
+            "client=" + this.currentClient + ", " +
+            "id=" + this.id +
+        '}';
     }
 }

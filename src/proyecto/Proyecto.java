@@ -29,6 +29,12 @@ public class Proyecto {
                     )
                 );
             bank.save("prod.txt");
+        } else {
+            JOptionPane.showMessageDialog(null, bank, "Bank loaded", JOptionPane.INFORMATION_MESSAGE);
+
+
+            JOptionPane.showMessageDialog(null, bank.boxes.preferentialBox, "Preferential box", JOptionPane.INFORMATION_MESSAGE);
+            return;
         }
         Client client = new Client("Sr. Alfredo");
         Ticket ticket = new Ticket("retiro", TicketType.SINGLE_TRANSACTION);
@@ -36,19 +42,27 @@ public class Proyecto {
         Client client2 = new Client("Client stacks..."); // the idea of this client is to test the saved data is loaded correctly
         Ticket ticket2 = new Ticket("retiro", TicketType.SINGLE_TRANSACTION);
 
-        JOptionPane.showMessageDialog(null, "Hora de creación del ticket de Sr. Alfredo:" + ticket.createdAt);
+        Client client3 = new Client("Client stacks..."); // the idea of this client is to test the saved data is loaded correctly
+        Ticket ticket3 = new Ticket("retiro", TicketType.SINGLE_TRANSACTION);
 
-        ticket.setCurrentClient(client);
-        ticket2.setCurrentClient(client2);
+        Client client4 = new Client("Client stacks..."); // the idea of this client is to test the saved data is loaded correctly
+        Ticket ticket4 = new Ticket("retiro", TicketType.SINGLE_TRANSACTION);
+
+        Client client5 = new Client("Client stacks..."); // the idea of this client is to test the saved data is loaded correctly
+        Ticket ticket5 = new Ticket("retiro", TicketType.SINGLE_TRANSACTION);
 
         bank.boxes.preferentialBox.enqueue(ticket);
+        JOptionPane.showMessageDialog(null, bank.boxes.preferentialBox + "\nLast ticket is" + bank.boxes.preferentialBox.getLastTicket(), "Ticket en cola preferencial", JOptionPane.INFORMATION_MESSAGE);
         bank.boxes.preferentialBox.enqueue(ticket2);
-        bank.save(Constants.BANK_FILENAME);
-
-        JOptionPane.showMessageDialog(null, "Ticket en cola: " + bank.boxes.preferentialBox, "Ticket en cola preferencial", JOptionPane.INFORMATION_MESSAGE);
-
+        JOptionPane.showMessageDialog(null, bank.boxes.preferentialBox + "\nLast ticket is" + bank.boxes.preferentialBox.getLastTicket(), "Ticket en cola preferencial", JOptionPane.INFORMATION_MESSAGE);
+        bank.boxes.preferentialBox.enqueue(ticket3);
+        JOptionPane.showMessageDialog(null, bank.boxes.preferentialBox + "\nLast ticket is" + bank.boxes.preferentialBox.getLastTicket(), "Ticket en cola preferencial", JOptionPane.INFORMATION_MESSAGE);
+        bank.boxes.preferentialBox.enqueue(ticket4);
+        JOptionPane.showMessageDialog(null, bank.boxes.preferentialBox + "\nLast ticket is" + bank.boxes.preferentialBox.getLastTicket(), "Ticket en cola preferencial", JOptionPane.INFORMATION_MESSAGE);
+        bank.boxes.preferentialBox.enqueue(ticket5);
+        JOptionPane.showMessageDialog(null, bank.boxes.preferentialBox + "\nLast ticket is" + bank.boxes.preferentialBox.getLastTicket(), "Ticket en cola preferencial", JOptionPane.INFORMATION_MESSAGE);
         Ticket ticketAttended = bank.boxes.preferentialBox.attend();
-        JOptionPane.showMessageDialog(null, "Ticket atendido: " + ticketAttended, "Ticket atendido", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, bank.boxes.preferentialBox + "\nLast ticket is" + bank.boxes.preferentialBox.getLastTicket(), "Ticket en cola preferencial", JOptionPane.INFORMATION_MESSAGE);
 
         bank.save(Constants.BANK_FILENAME);
     }
